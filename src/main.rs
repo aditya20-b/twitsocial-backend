@@ -6,8 +6,6 @@ use crate::schema::{userauth::{self, username}, followers, likes, replies, tweet
 mod models;
 mod schema;
 mod connection;
-// mod traits;
-
 
 
 fn main() -> Result<(), Error>{

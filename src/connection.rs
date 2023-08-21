@@ -19,13 +19,6 @@ pub struct Database {
     _connection: PostgresPool,
 }
 
-pub trait BasicDBOperations {
-    fn get(&self, id: i32) -> Result<User, Error>;
-    fn create(&self, user: User) -> Result<usize, Error>;
-    fn update(&self, user: User) -> Result<usize, Error>;
-    fn delete(&self, id: i32) -> Result<usize, Error>;
-}
-
 
 /*
 List of everything that needs to be implemented:
