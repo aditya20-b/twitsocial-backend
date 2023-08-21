@@ -13,11 +13,12 @@ CREATE TABLE IF NOT EXISTS USERS (
     user_id INT,
     username VARCHAR(32) NOT NULL UNIQUE,
     handle VARCHAR(50) NOT NULL,
-    is_private BOOLEAN DEFAULT FALSE,
+    is_private BOOLEAN DEFAULT FALSE NOT NULL,
     bio TEXT,
     profile_pic VARCHAR(255),
     banner VARCHAR(255),
-    date_created TIMESTAMP DEFAULT NOW(),
+    date_created TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+    date_updated TIMESTAMPTZ DEFAULT NOW() NOT NULL,
     PRIMARY KEY (user_id),
     FOREIGN KEY (user_id) REFERENCES USERAUTH(user_id),
     FOREIGN KEY (username) REFERENCES USERAUTH(username)
@@ -28,7 +29,8 @@ CREATE TABLE IF NOT EXISTS TWEETS (
     tweet_id SERIAL,
     user_id INT,
     content TEXT NOT NULL,
-    created_at TIMESTAMPTZ DEFAULT NOW(),
+    date_created TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+    date_updated TIMESTAMPTZ DEFAULT NOW() NOT NULL,
     PRIMARY KEY (tweet_id),
     FOREIGN KEY (user_id) REFERENCES USERS(user_id)
 );
@@ -49,7 +51,8 @@ CREATE TABLE IF NOT EXISTS REPLIES (
     tweet_id INTEGER,
     user_id INTEGER,
     reply_content TEXT NOT NULL,
-    date_created TIMESTAMPTZ DEFAULT NOW(),
+    date_created TIMESTAMPTZ DEFAULT NOW() NOT NULL,
+    date_updated TIMESTAMPTZ DEFAULT NOW() NOT NULL,
     PRIMARY KEY (reply_id),
     FOREIGN KEY (tweet_id) REFERENCES TWEETS(tweet_id),
     FOREIGN KEY (user_id) REFERENCES USERAUTH(user_id)
